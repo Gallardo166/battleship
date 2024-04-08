@@ -20,43 +20,82 @@ const Gameboard = function() {
   let shipCoordinates = [];
   let missedAttacks = [];
 
+  const isOccupied = function(coordinates) {
+    for (let i=0; i<shipCoordinates.length; i++) {
+      for (let j=0; j<shipCoordinates[i].coordinates.length; j++) {
+        if (shipCoordinates[i].coordinates[j][0] === coordinates[0] && shipCoordinates[i].coordinates[j][1] === coordinates[1]) {
+          return shipCoordinates[i].ship;
+        }
+      }
+    }
+    return false;
+  };
+
+  const isOutsideGameboard = function(coordinates) {
+    if (coordinates[0] < 0 || coordinates[0] > 9 || coordinates[1] < 0 || coordinates[1] > 9) {
+      return true;
+    }
+    return false;
+  };
+
   const placeShip = function(length, startCoord, orientation) {
     const newShip = Ship(length);
     let coordinates = [startCoord];
+    let clashingShips = false;
   
     if (orientation === 'horizontal') {
+      for (let i=0; (i<length && clashingShips === false); i++) {
+        if (isOccupied([startCoord[0], startCoord[1] + i])) return;
+        if (isOutsideGameboard([startCoord[0], startCoord[1] + i])) return;
+      }
       for (let i=1; i<length; i++) {
         coordinates.push([startCoord[0], startCoord[1] + i]);
       }
     } else {
+      for (let i=0; (i<length && clashingShips === false); i++) {
+        if (isOccupied([startCoord[0] + i, startCoord[1]])) return;
+        if (isOutsideGameboard([startCoord[0] + i, startCoord[1]])) return;
+      }
       for (let i=1; i<length; i++) {
         coordinates.push([startCoord[0] + i, startCoord[1]]);
       }
     }
 
-    shipCoordinates.push({ship: newShip, coordinates })
+    shipCoordinates.push({ ship: newShip, coordinates });
   };
 
-  const receiveAttack = function(attackCoordinates) {
-    for (let i=0; i<shipCoordinates.length; i++) {
-      for (let j=0; j<shipCoordinates[i].coordinates.length; j++) {
-        if (shipCoordinates[i].coordinates[j][0] === attackCoordinates[0] && shipCoordinates[i].coordinates[j][1] === attackCoordinates[1]) {
-          shipCoordinates[i].ship.hit();
-          return
-        }
-      }
+  const receiveAttack = function(coordinates) {
+    const ship = isOccupied(coordinates);
+    if (ship !== false) {
+      ship.hit();
+      return;
     }
-    missedAttacks.push(attackCoordinates);
-  }
+    missedAttacks.push(coordinates);
+  };
 
   const isAllSunk = function() {
     for (let i = 0; i<shipCoordinates.length; i++) {
       if (shipCoordinates[i].ship.isSunk() === false) return false;
     }
     return true;
-  }
+  };
 
   return { shipCoordinates, placeShip, receiveAttack, isAllSunk }
+};
+
+const Player = function() {
+  const playerGameboard = Gameboard();
+  let attackCoordinates = [];
+
+  const attack = function(targetGameboard, coordinates) {
+    for (let i=0; i<attackCoordinates.length; i++) {
+      if (attackCoordinates[i][0] === coordinates[0] && attackCoordinates[i][1] === coordinates[1]) return;
+    }
+    targetGameboard.receiveAttack(coordinates);
+    attackCoordinates.push(coordinates);
+  };
+
+  return { playerGameboard, attack };
 }
 
-export { Ship, Gameboard };
+export { Ship, Gameboard, Player };
