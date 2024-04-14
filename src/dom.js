@@ -1,16 +1,17 @@
 import { checkEnd } from "./game";
 
-const renderGameboard = function(player, coordinates) {
+const renderGameboard = function(player, coordinates, hidden) {
   for (let i=0; i<coordinates.length; i++) {
     const grid = document.querySelector(`[data-player='${player}'][data-row='${coordinates[i][0]}'][data-column='${coordinates[i][1]}']`);
-    grid.classList.add('occupied');
+    if (!grid.classList.contains('occupied') && !hidden) {grid.classList.add('occupied')};
   }
 }
 
 const makeGameboardAttackable = function(player, computer) {
   const computerGameboard = document.querySelector('#player-2');
+
   const attackEvent = function(event) {
-    if (event.target.classList.contains('attacked')) {
+    if (event.target.classList.contains('attacked') || (event.target.id === 'player-2')) {
       return;
     }
     const row = Number(event.target.getAttribute('data-row'));
@@ -32,4 +33,43 @@ const makeGameboardAttackable = function(player, computer) {
 
 };
 
-export { renderGameboard, makeGameboardAttackable };
+const toggleOrientationButton = function() {
+  const orientationButton = document.querySelector('#orientation');
+  orientationButton.addEventListener('click', (event) => {
+    if (event.target.textContent === 'Horizontal') {
+      event.target.textContent = 'Vertical';
+    } else {
+      event.target.textContent = 'Horizontal';
+    }
+  });
+};
+
+const placeShips = function(player, computer) {
+  toggleOrientationButton();
+
+  const playerGrids = document.querySelectorAll('[data-player="player-1"]');
+  const shipLengths = [5, 4, 3, 3, 2];
+  let i = 0;
+
+  const placeShip = function(event) {
+    const row = Number(event.target.getAttribute('data-row'));
+    const column = Number(event.target.getAttribute('data-column'));
+    const orientation = document.querySelector('#orientation').textContent.toLowerCase();
+    const successfulPlacement = player.playerGameboard.placeShip(shipLengths[i], [row, column], orientation);
+
+    if (!successfulPlacement) return;
+    renderGameboard('player-1', player.playerGameboard.getCoordinates());
+    i += 1;
+
+    if (i === 5) {
+      Array.from(playerGrids).forEach((grid) => grid.removeEventListener('click', placeShip));
+      computer.randomPlaceShips();
+      makeGameboardAttackable(player, computer);
+    }
+  }
+
+  Array.from(playerGrids).forEach((grid) => grid.addEventListener('click', placeShip));
+
+};
+
+export { renderGameboard, makeGameboardAttackable, placeShips };

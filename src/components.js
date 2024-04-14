@@ -1,3 +1,5 @@
+import { renderGameboard } from "./dom";
+
 const Ship = function(length) {
   let hitCount = 0;
   let sunk = false;
@@ -45,16 +47,16 @@ const Gameboard = function() {
   
     if (orientation === 'horizontal') {
       for (let i=0; (i<length && clashingShips === false); i++) {
-        if (isOccupied([startCoord[0], startCoord[1] + i])) return;
-        if (isOutsideGameboard([startCoord[0], startCoord[1] + i])) return;
+        if (isOccupied([startCoord[0], startCoord[1] + i])) return false;
+        if (isOutsideGameboard([startCoord[0], startCoord[1] + i])) return false;
       }
       for (let i=1; i<length; i++) {
         coordinates.push([startCoord[0], startCoord[1] + i]);
       }
     } else {
       for (let i=0; (i<length && clashingShips === false); i++) {
-        if (isOccupied([startCoord[0] + i, startCoord[1]])) return;
-        if (isOutsideGameboard([startCoord[0] + i, startCoord[1]])) return;
+        if (isOccupied([startCoord[0] + i, startCoord[1]])) return false;
+        if (isOutsideGameboard([startCoord[0] + i, startCoord[1]])) return false;
       }
       for (let i=1; i<length; i++) {
         coordinates.push([startCoord[0] + i, startCoord[1]]);
@@ -62,6 +64,7 @@ const Gameboard = function() {
     }
 
     shipCoordinates.push({ ship: newShip, coordinates });
+    return true;
   };
 
   const receiveAttack = function(coordinates) {
@@ -116,13 +119,27 @@ const Player = function() {
       }
       if (!noDuplicates) { continue }
       targetGameboard.receiveAttack([row, column]);
-      console.log(attackCoordinates);
       attackCoordinates.push([row, column]);
       return [row, column];
     }
-  }
+  };
 
-  return { playerGameboard, attack, randomAttack };
+  const randomPlaceShips = function() {
+    const shipLengths = [5, 4, 3, 3, 2];
+    const orientations = ['horizontal', 'vertical'];
+    let i = 0;
+
+    while (playerGameboard.shipCoordinates.length < 5) {
+      const row = Math.floor(Math.random() * 10);
+      const column = Math.floor(Math.random() * 10);
+      const orientation = orientations[Math.floor(Math.random() * 2)];
+      const successfulPlacement = playerGameboard.placeShip(shipLengths[i], [row, column], orientation);
+      if (successfulPlacement) { i += 1 }
+    }
+    renderGameboard('player-2', playerGameboard.getCoordinates(), true);
+  };
+
+  return { playerGameboard, attack, randomAttack, randomPlaceShips };
 }
 
 export { Ship, Gameboard, Player };
