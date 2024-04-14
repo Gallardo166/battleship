@@ -6,7 +6,7 @@ test('ship is not sunk when not hit enough times', () => {
     battleship.hit()
   }
   expect(battleship.isSunk()).toBe(false);
-})
+});
 
 test('ship is sunk when hit enough times', () => {
   const carrier = Ship(5);
@@ -60,3 +60,10 @@ test('a player can attack another player', () => {
   playerTwo.attack(playerOne.playerGameboard, [4, 2]);
   expect(playerTwo.playerGameboard.isAllSunk()).toBe(true);
 });
+
+test('return player ship coordinates properly', () => {
+  const playerOne = Player();
+
+  playerOne.playerGameboard.placeShip(3, [2, 2], 'vertical');
+  expect(playerOne.playerGameboard.getCoordinates()).toEqual([[2, 2], [3, 2], [4, 2]])
+})

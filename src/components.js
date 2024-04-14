@@ -80,7 +80,17 @@ const Gameboard = function() {
     return true;
   };
 
-  return { shipCoordinates, placeShip, receiveAttack, isAllSunk }
+  const getCoordinates = function() {
+    let coordinates = [];
+    for (let i=0; i<shipCoordinates.length; i++) {
+      for (let j=0; j<shipCoordinates[i].coordinates.length; j++) {
+        coordinates.push(shipCoordinates[i].coordinates[j]);
+      }
+    }
+    return coordinates;
+  }
+
+  return { shipCoordinates, placeShip, receiveAttack, isAllSunk, getCoordinates };
 };
 
 const Player = function() {
@@ -95,7 +105,24 @@ const Player = function() {
     attackCoordinates.push(coordinates);
   };
 
-  return { playerGameboard, attack };
+  const randomAttack = function(targetGameboard) {
+    while (true) {
+      let noDuplicates = true;
+      const row = Math.floor(Math.random() * 10);
+      const column = Math.floor(Math.random() * 10);
+
+      for (let i=0; i<attackCoordinates.length; i++) {
+        if (attackCoordinates[i][0] === row && attackCoordinates[i][1] === column) {noDuplicates = false};
+      }
+      if (!noDuplicates) { continue }
+      targetGameboard.receiveAttack([row, column]);
+      console.log(attackCoordinates);
+      attackCoordinates.push([row, column]);
+      return [row, column];
+    }
+  }
+
+  return { playerGameboard, attack, randomAttack };
 }
 
 export { Ship, Gameboard, Player };
