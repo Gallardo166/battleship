@@ -9,7 +9,7 @@ body {
   gap: 8px;
 }
 
-#orientation-container {
+#orientation-container, #message, #restart {
   align-self: center;
 }
 
@@ -42,4 +42,8 @@ body {
 
 .attacked {
   background-color: red;
+}
+
+.hidden {
+  display: none;
 }

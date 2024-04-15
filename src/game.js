@@ -1,5 +1,5 @@
 import { Ship, Gameboard, Player } from './components';
-import { renderGameboard, makeGameboardAttackable, placeShips, } from './dom';
+import { renderGameboard, makeGameboardAttackable, placeShips, displayResults } from './dom';
 
 const game = function() {
   const player = Player();
@@ -10,11 +10,11 @@ const game = function() {
 
 const checkEnd = function(player, computer) {
   if (player.playerGameboard.isAllSunk()) {
-    console.log('Computer wins!');
+    displayResults('Computer');
     return true;
   }
   if (computer.playerGameboard.isAllSunk()) {
-    console.log('Player wins!');
+    displayResults('Player');
     return true;
   }
 
