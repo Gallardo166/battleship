@@ -40,10 +40,18 @@ body {
   background-color: black;
 }
 
-.attacked {
+.hit {
+  background-color: blue;
+}
+
+.occupied.hidden {
+  background-color:white;
+}
+
+.occupied.hit {
   background-color: red;
 }
 
-.hidden {
+button.hidden {
   display: none;
 }

@@ -1,5 +1,3 @@
-import { renderGameboard } from "./dom";
-
 const Ship = function(length) {
   let hitCount = 0;
   let sunk = false;
@@ -20,7 +18,7 @@ const Ship = function(length) {
 
 const Gameboard = function() {
   let shipCoordinates = [];
-  let missedAttacks = [];
+  let receivedAttacks = [];
 
   const isOccupied = function(coordinates) {
     for (let i=0; i<shipCoordinates.length; i++) {
@@ -71,9 +69,8 @@ const Gameboard = function() {
     const ship = isOccupied(coordinates);
     if (ship !== false) {
       ship.hit();
-      return;
     }
-    missedAttacks.push(coordinates);
+    receivedAttacks.push(coordinates);
   };
 
   const isAllSunk = function() {
@@ -83,32 +80,26 @@ const Gameboard = function() {
     return true;
   };
 
-  const getCoordinates = function() {
-    let coordinates = [];
-    for (let i=0; i<shipCoordinates.length; i++) {
-      for (let j=0; j<shipCoordinates[i].coordinates.length; j++) {
-        coordinates.push(shipCoordinates[i].coordinates[j]);
-      }
-    }
-    return coordinates;
-  }
-
-  return { shipCoordinates, placeShip, receiveAttack, isAllSunk, getCoordinates };
+  return { shipCoordinates, receivedAttacks, placeShip, receiveAttack, isAllSunk };
 };
 
-const Player = function() {
+const Player = function(name) {
+  const playerName = name;
   const playerGameboard = Gameboard();
-  let attackCoordinates = [];
 
-  const attack = function(targetGameboard, coordinates) {
-    for (let i=0; i<attackCoordinates.length; i++) {
-      if (attackCoordinates[i][0] === coordinates[0] && attackCoordinates[i][1] === coordinates[1]) return;
-    }
-    targetGameboard.receiveAttack(coordinates);
-    attackCoordinates.push(coordinates);
+  const attack = function(target, coordinates) {
+    target.playerGameboard.receiveAttack(coordinates);
   };
 
-  const randomAttack = function(targetGameboard) {
+  return { playerName, playerGameboard, attack };
+};
+
+const Computer = function() {
+  const playerName = 'player-2';
+  const playerGameboard = Gameboard();
+  const attackCoordinates = [];
+
+  const randomAttack = function(target) {
     while (true) {
       let noDuplicates = true;
       const row = Math.floor(Math.random() * 10);
@@ -118,7 +109,7 @@ const Player = function() {
         if (attackCoordinates[i][0] === row && attackCoordinates[i][1] === column) {noDuplicates = false};
       }
       if (!noDuplicates) { continue }
-      targetGameboard.receiveAttack([row, column]);
+      target.playerGameboard.receiveAttack([row, column]);
       attackCoordinates.push([row, column]);
       return [row, column];
     }
@@ -136,10 +127,9 @@ const Player = function() {
       const successfulPlacement = playerGameboard.placeShip(shipLengths[i], [row, column], orientation);
       if (successfulPlacement) { i += 1 }
     }
-    renderGameboard('player-2', playerGameboard.getCoordinates(), true);
   };
 
-  return { playerGameboard, attack, randomAttack, randomPlaceShips };
+  return { playerName, playerGameboard, randomAttack, randomPlaceShips };
 }
 
-export { Ship, Gameboard, Player };
+export { Ship, Gameboard, Player, Computer };

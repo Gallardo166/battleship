@@ -55,15 +55,8 @@ test('a player can attack another player', () => {
   const playerTwo = Player();
 
   playerOne.playerGameboard.placeShip(3, [2, 2], 'vertical');
-  playerTwo.attack(playerOne.playerGameboard, [2, 2]);
-  playerTwo.attack(playerOne.playerGameboard, [3, 2]);
-  playerTwo.attack(playerOne.playerGameboard, [4, 2]);
+  playerTwo.attack(playerOne, [2, 2]);
+  playerTwo.attack(playerOne, [3, 2]);
+  playerTwo.attack(playerOne, [4, 2]);
   expect(playerTwo.playerGameboard.isAllSunk()).toBe(true);
 });
-
-test('return player ship coordinates properly', () => {
-  const playerOne = Player();
-
-  playerOne.playerGameboard.placeShip(3, [2, 2], 'vertical');
-  expect(playerOne.playerGameboard.getCoordinates()).toEqual([[2, 2], [3, 2], [4, 2]])
-})
