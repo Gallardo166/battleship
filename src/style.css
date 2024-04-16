@@ -55,3 +55,7 @@ body {
 button.hidden {
   display: none;
 }
+
+.unclickable {
+  pointer-events: none;
+}

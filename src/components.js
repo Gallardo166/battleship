@@ -1,3 +1,5 @@
+import { arrayIncludesArray } from "./array-search";
+
 const Ship = function(length) {
   let hitCount = 0;
   let sunk = false;
@@ -22,10 +24,8 @@ const Gameboard = function() {
 
   const isOccupied = function(coordinates) {
     for (let i=0; i<shipCoordinates.length; i++) {
-      for (let j=0; j<shipCoordinates[i].coordinates.length; j++) {
-        if (shipCoordinates[i].coordinates[j][0] === coordinates[0] && shipCoordinates[i].coordinates[j][1] === coordinates[1]) {
-          return shipCoordinates[i].ship;
-        }
+      if (arrayIncludesArray(shipCoordinates[i].coordinates, coordinates)) {
+        return shipCoordinates[i].ship;
       }
     }
     return false;
@@ -101,14 +101,10 @@ const Computer = function() {
 
   const randomAttack = function(target) {
     while (true) {
-      let noDuplicates = true;
       const row = Math.floor(Math.random() * 10);
       const column = Math.floor(Math.random() * 10);
 
-      for (let i=0; i<attackCoordinates.length; i++) {
-        if (attackCoordinates[i][0] === row && attackCoordinates[i][1] === column) {noDuplicates = false};
-      }
-      if (!noDuplicates) { continue }
+      if (arrayIncludesArray(attackCoordinates, [row, column])) { continue }
       target.playerGameboard.receiveAttack([row, column]);
       attackCoordinates.push([row, column]);
       return [row, column];

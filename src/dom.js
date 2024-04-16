@@ -12,9 +12,20 @@ const renderGameboard = function(player, hidden) {
   }
 };
 
-const print = function(message) {
+const print = async function(message, afterDelay) {
+  const grids = document.querySelectorAll('.grid');
   const messageContainer = document.querySelector('#message');
-  messageContainer.textContent = message;
+  const messageCharacters = message.split('');
+
+  Array.from(grids).forEach((grid) => {grid.classList.add('unclickable')});
+  messageContainer.textContent = '';
+
+  for (let i=0; i<messageCharacters.length; i++) {
+    await new Promise((resolve) => setTimeout(resolve, 30));
+    messageContainer.textContent += messageCharacters[i];
+  }
+  await new Promise((resolve) => setTimeout(resolve, afterDelay));
+  Array.from(grids).forEach((grid) => {grid.classList.remove('unclickable')});
 };
 
 const toggleOrientationButton = function() {
