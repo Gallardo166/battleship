@@ -1,9 +1,55 @@
+const hideOptions = function() {
+  const options = document.querySelector('#game-options');
+  const game = document.querySelector('#game');
+
+  options.classList.add('hidden');
+  game.classList.remove('hidden');
+};
+
+const showOptions = function() {
+  const options = document.querySelector('#game-options');
+  const game = document.querySelector('#game');
+
+  options.classList.remove('hidden');
+  game.classList.add('hidden');
+};
+
+const loadPassingScreen = function(nextFunction) {
+  const game = document.querySelector('#game');
+  const passingScreen = document.querySelector('#passing-screen');
+  const nextButton = document.createElement('button');
+
+  game.classList.add('hidden');
+  passingScreen.classList.remove('hidden');
+
+  nextButton.id = 'next';
+  nextButton.textContent = 'Next turn';
+  passingScreen.appendChild(nextButton);
+
+  nextButton.addEventListener('click', () => {
+    nextFunction();
+    stopPassingScreen();
+    passingScreen.removeChild(nextButton);
+  });
+
+};
+
+const stopPassingScreen = function() {
+  const game = document.querySelector('#game');
+  const passingScreen = document.querySelector('#passing-screen');
+
+  game.classList.remove('hidden');
+  passingScreen.classList.add('hidden');
+}
+
 const renderGameboard = function(player, hidden) {
   for (let i=0; i<player.playerGameboard.shipCoordinates.length; i++) {
     for (let j=0; j<player.playerGameboard.shipCoordinates[i].coordinates.length; j++) {
       const grid = document.querySelector(`[data-player='${player.playerName}'][data-row='${player.playerGameboard.shipCoordinates[i].coordinates[j][0]}'][data-column='${player.playerGameboard.shipCoordinates[i].coordinates[j][1]}']`);
       if (!grid.classList.contains('occupied')) {grid.classList.add('occupied')};
-      if (hidden) {grid.classList.add('hidden')};
+      if (hidden) {
+        grid.classList.add('hidden')
+      } else { grid.classList.remove('hidden') }
     }
   }
   for (let i=0; i<player.playerGameboard.receivedAttacks.length; i++) {
@@ -49,4 +95,4 @@ const restartGameboards = function() {
   });
  };
 
-export { renderGameboard, print, toggleOrientationButton, restartGameboards };
+export { hideOptions, showOptions, loadPassingScreen, stopPassingScreen, renderGameboard, print, toggleOrientationButton, restartGameboards };

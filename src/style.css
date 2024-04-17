@@ -9,7 +9,7 @@ body {
   gap: 8px;
 }
 
-#orientation-container, #message, #restart {
+#orientation-container, #message, #home {
   align-self: center;
 }
 
@@ -45,6 +45,7 @@ body {
 }
 
 .occupied.hidden {
+  display:block;
   background-color:white;
 }
 
@@ -52,7 +53,7 @@ body {
   background-color: red;
 }
 
-button.hidden {
+.hidden {
   display: none;
 }
 

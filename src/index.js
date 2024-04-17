@@ -1,4 +1,6 @@
 import './style.css';
-import game from './game';
+import homeScreen from './game';
+import { toggleOrientationButton } from './dom';
 
-game();
+homeScreen();
+toggleOrientationButton();

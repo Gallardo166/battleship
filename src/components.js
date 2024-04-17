@@ -95,7 +95,7 @@ const Player = function(name) {
 };
 
 const Computer = function() {
-  const playerName = 'player-2';
+  const playerName = 'Player 2';
   const playerGameboard = Gameboard();
   const attackCoordinates = [];
 
