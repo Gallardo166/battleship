@@ -1,24 +1,41 @@
 import { Player, Computer } from './components';
-import { hideOptions, showOptions, loadPassingScreen, renderGameboard, print, restartGameboards } from './dom';
+import { hideOptions, showOptions, hideGame, showGame, showDifficulties, hideDifficulties, loadPassingScreen, renderGameboard, print, restartGameboards } from './dom';
 import { arrayIncludesArray } from './array-search';
 
 const homeScreen = function() {
   const singlePlayer = document.querySelector('#single-player');
   const multiplayer = document.querySelector('#multiplayer');
+  const easy = document.querySelector('#easy');
+  const medium = document.querySelector('#medium');
 
   singlePlayer.addEventListener('click', () => {
     hideOptions();
-    singlePlayerGame();
+    showDifficulties();
   });
+
   multiplayer.addEventListener('click', () => {
     hideOptions();
+    showGame();
     multiplayerGame();
   });
+
+  easy.addEventListener('click', () => {
+    const computer = Computer();
+    hideDifficulties();
+    showGame();
+    singlePlayerGame(computer, computer.randomAttack);
+  });
+
+  medium.addEventListener('click', () => {
+    const computer = Computer();
+    hideDifficulties();
+    showGame();
+    singlePlayerGame(computer, computer.adjacentAttack);
+  })
 };
 
-const singlePlayerGame = async function() {
+const singlePlayerGame = async function(computer, attackFunction) {
   const player = Player('Player 1');
-  const computer = Computer();
   const playerGrids = document.querySelectorAll('[data-player="Player 1"]');
   const computerGrids = document.querySelectorAll('[data-player="Player 2"]');
   const homeButton = document.querySelector('#home');
@@ -91,6 +108,7 @@ const singlePlayerGame = async function() {
 
       homeButton.addEventListener('click', () => {
         restartGameboards();
+        hideGame();
         showOptions();
         homeButton.classList.add('hidden');
       })
@@ -99,7 +117,7 @@ const singlePlayerGame = async function() {
 
     Array.from(computerGrids).forEach((grid) => grid.removeEventListener('click', attack));
     await print('Enemy is attacking...', 300);
-    const [computerRow, computerColumn] = computer.randomAttack(player);
+    const [computerRow, computerColumn] = attackFunction(player);
     renderGameboard(player, false);
     checkComputerHit: 
       for (let i=0; i<player.playerGameboard.shipCoordinates.length; i++) {
@@ -125,6 +143,7 @@ const singlePlayerGame = async function() {
 
       homeButton.addEventListener('click', () => {
         restartGameboards();
+        hideGame();
         showOptions();
         homeButton.classList.add('hidden');
       })
@@ -236,6 +255,7 @@ const multiplayerGame = async function() {
       homeButton.classList.remove('hidden');
         homeButton.addEventListener('click', () => {
           restartGameboards();
+          hideGame();
           showOptions();
           homeButton.classList.add('hidden');
         })

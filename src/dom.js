@@ -1,18 +1,38 @@
 const hideOptions = function() {
   const options = document.querySelector('#game-options');
-  const game = document.querySelector('#game');
 
   options.classList.add('hidden');
-  game.classList.remove('hidden');
 };
 
 const showOptions = function() {
   const options = document.querySelector('#game-options');
-  const game = document.querySelector('#game');
 
   options.classList.remove('hidden');
+};
+
+const hideGame = function() {
+  const game = document.querySelector('#game');
+
   game.classList.add('hidden');
 };
+
+const showGame = function() {
+  const game = document.querySelector('#game');
+
+  game.classList.remove('hidden');
+};
+
+const hideDifficulties = function() {
+  const difficulty = document.querySelector('#difficulty');
+
+  difficulty.classList.add('hidden');
+};
+
+const showDifficulties = function() {
+  const difficulty = document.querySelector('#difficulty');
+
+  difficulty.classList.remove('hidden');
+}
 
 const loadPassingScreen = function(nextFunction) {
   const game = document.querySelector('#game');
@@ -95,4 +115,4 @@ const restartGameboards = function() {
   });
  };
 
-export { hideOptions, showOptions, loadPassingScreen, stopPassingScreen, renderGameboard, print, toggleOrientationButton, restartGameboards };
+export { hideOptions, showOptions, hideGame, showGame, hideDifficulties, showDifficulties, loadPassingScreen, stopPassingScreen, renderGameboard, print, toggleOrientationButton, restartGameboards };
