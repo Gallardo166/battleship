@@ -19,8 +19,8 @@ test('ship is sunk when hit enough times', () => {
 test('gameboard accurately reports when all ships are sunk', () => {
   const gameboard = Gameboard();
   gameboard.placeShip(3, [3, 3], 'horizontal');
-  gameboard.receiveAttack([3,3]);
-  gameboard.receiveAttack([3,4]);
+  gameboard.receiveAttack([3, 3]);
+  gameboard.receiveAttack([3, 4]);
   gameboard.receiveAttack([3, 5]);
   expect(gameboard.isAllSunk()).toBe(true);
 });

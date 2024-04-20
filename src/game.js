@@ -7,6 +7,7 @@ const homeScreen = function() {
   const multiplayer = document.querySelector('#multiplayer');
   const easy = document.querySelector('#easy');
   const medium = document.querySelector('#medium');
+  const hard = document.querySelector('#hard');
 
   singlePlayer.addEventListener('click', () => {
     hideOptions();
@@ -31,7 +32,14 @@ const homeScreen = function() {
     hideDifficulties();
     showGame();
     singlePlayerGame(computer, computer.adjacentAttack);
-  })
+  });
+
+  hard.addEventListener('click', () => {
+    const computer = Computer();
+    hideDifficulties();
+    showGame();
+    singlePlayerGame(computer, computer.diagonalAttack);
+  });
 };
 
 const singlePlayerGame = async function(computer, attackFunction) {
@@ -134,9 +142,6 @@ const singlePlayerGame = async function(computer, attackFunction) {
         }
       }
 
-    await print('Your turn to attack.', 0)
-    Array.from(computerGrids).forEach((grid) => grid.addEventListener('click', attack));
-
     if (await checkEnd()) {
       Array.from(computerGrids).forEach((grid) => grid.removeEventListener('click', attack));
       homeButton.classList.remove('hidden');
@@ -149,6 +154,9 @@ const singlePlayerGame = async function(computer, attackFunction) {
       })
       return;
     }
+
+    await print('Your turn to attack.', 0)
+    Array.from(computerGrids).forEach((grid) => grid.addEventListener('click', attack));
 
     event.stopPropagation();
   };

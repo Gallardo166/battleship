@@ -103,6 +103,8 @@ const Computer = function() {
   let successfulAttackHorizontalAdjacent = [];
   let adjacentMode = false;
   let orientation;
+  let diagonalAttackQueue = [];
+  let i = 0;
 
   const randomAttack = function(target) {
     while (true) {
@@ -116,75 +118,115 @@ const Computer = function() {
     }
   };
 
+  const getAdjacentMoves = function(coordinates) {
+    const verticalMoves = [[1, 0], [-1, 0]];
+    const horizontalMoves = [[0, 1], [0, -1]];
+    let verticalCoordinates = [];
+    let horizontalCoordinates = [];
+
+    for (let i=0; i<verticalMoves.length; i++) {
+      const adjacentCoordinate = [coordinates[0] + verticalMoves[i][0], coordinates[1] + verticalMoves[i][1]];
+      if (!playerGameboard.isOutsideGameboard(adjacentCoordinate) && !arrayIncludesArray(attackCoordinates, adjacentCoordinate)) {
+        verticalCoordinates.push([adjacentCoordinate, 'vertical']);
+      }
+    }
+
+    for (let i=0; i<horizontalMoves.length; i++) {
+      const adjacentCoordinate = [coordinates[0] + horizontalMoves[i][0], coordinates[1] + horizontalMoves[i][1]];
+      if (!playerGameboard.isOutsideGameboard(adjacentCoordinate) && !arrayIncludesArray(attackCoordinates, adjacentCoordinate)) {
+        horizontalCoordinates.push([adjacentCoordinate, 'horizontal']);
+      }
+    }
+
+    return { verticalCoordinates, horizontalCoordinates };
+  };
+
   const adjacentAttack = function(target) {
 
-    const adjacentMoves = function(coordinates) {
-      const verticalMoves = [[1, 0], [-1, 0]];
-      const horizontalMoves = [[0, 1], [0, -1]];
-      let verticalCoordinates = [];
-      let horizontalCoordinates = [];
+    if (!adjacentMode) {
+      const [row, column] = randomAttack(target);
 
-      for (let i=0; i<verticalMoves.length; i++) {
-        const adjacentCoordinate = [coordinates[0] + verticalMoves[i][0], coordinates[1] + verticalMoves[i][1]];
-        if (!playerGameboard.isOutsideGameboard(adjacentCoordinate) && !arrayIncludesArray(attackCoordinates, adjacentCoordinate)) {
-          verticalCoordinates.push([adjacentCoordinate, 'vertical']);
-        }
+      if (target.playerGameboard.isOccupied([row, column])) {
+        adjacentMode = true;
+        successfulAttack = [row, column];
+        getAdjacentMoves(successfulAttack).verticalCoordinates.forEach((move) => successfulAttackVerticalAdjacent.push(move));
+        getAdjacentMoves(successfulAttack).horizontalCoordinates.forEach((move) => successfulAttackHorizontalAdjacent.push(move));
+      }
+      return [row, column];
+    } else {
+      let row, column;
+      let orientation;
+      if (successfulAttackVerticalAdjacent.length === 0 || orientation === 'horizontal') {
+        [row, column] = successfulAttackHorizontalAdjacent.shift()[0];
+        orientation = 'horizontal';
+      } else {
+        [row, column] = successfulAttackVerticalAdjacent.shift()[0];
+        orientation = 'vertical';
       }
 
-      for (let i=0; i<horizontalMoves.length; i++) {
-        const adjacentCoordinate = [coordinates[0] + horizontalMoves[i][0], coordinates[1] + horizontalMoves[i][1]];
-        if (!playerGameboard.isOutsideGameboard(adjacentCoordinate) && !arrayIncludesArray(attackCoordinates, adjacentCoordinate)) {
-          horizontalCoordinates.push([adjacentCoordinate, 'horizontal']);
-        }
+      const index = arrayIncludesArray(diagonalAttackQueue, [row, column], true);
+
+      target.playerGameboard.receiveAttack([row, column]);
+      attackCoordinates.push([row, column]);
+      if (index !== false) {
+        diagonalAttackQueue.splice(index, 1);
       }
-
-      return { verticalCoordinates, horizontalCoordinates };
-    };
-
-      if (!adjacentMode) {
-        const [row, column] = randomAttack(target);
-
-        if (target.playerGameboard.isOccupied([row, column])) {
-          if (target.playerGameboard.isAllSunk()) {
-            adjacentMode = false;
-          } else {
-            adjacentMode = true;
+      
+      if (target.playerGameboard.isOccupied([row, column])) {
+        if (target.playerGameboard.isOccupied([row, column]).isSunk()) {
+          successfulAttackVerticalAdjacent = [];
+          successfulAttackHorizontalAdjacent = [];
+          adjacentMode = false;
+        } else {
+          if (orientation === 'horizontal') {
             successfulAttack = [row, column];
-            adjacentMoves(successfulAttack).verticalCoordinates.forEach((move) => successfulAttackVerticalAdjacent.push(move));
-            adjacentMoves(successfulAttack).horizontalCoordinates.forEach((move) => successfulAttackHorizontalAdjacent.push(move));
+            getAdjacentMoves(successfulAttack).horizontalCoordinates.forEach((move) => successfulAttackHorizontalAdjacent.push(move));
+          } else {
+            successfulAttack = [row, column];
+            getAdjacentMoves(successfulAttack).verticalCoordinates.forEach((move) => successfulAttackVerticalAdjacent.push(move));
           }
         }
-        return [row, column];
-      } else {
-        let row, column;
-        let orientation;
-        if (successfulAttackVerticalAdjacent.length === 0 || orientation === 'horizontal') {
-          [row, column] = successfulAttackHorizontalAdjacent.shift()[0];
-          orientation = 'horizontal';
-        } else {
-          [row, column] = successfulAttackVerticalAdjacent.shift()[0];
-          orientation = 'vertical';
-        }
+      }
+      return [row, column];
+    }
+  };
 
+  const getDiagonalMoves = function(coordinates) {
+    const possibleMoves = [[1, 1], [-1, 1], [1, -1], [-1, -1]];
+    let diagonalCoordinates = [];
+
+    possibleMoves.forEach((move) => {
+      const diagonalCoordinate = [coordinates[0] + move[0], coordinates[1] + move[1]];
+      if (!playerGameboard.isOutsideGameboard(diagonalCoordinate) && !arrayIncludesArray(attackCoordinates, diagonalCoordinate) && !arrayIncludesArray(diagonalAttackQueue, diagonalCoordinate)) {
+        diagonalCoordinates.push(diagonalCoordinate);
+      }
+    })
+    return diagonalCoordinates;
+  };
+
+  const diagonalAttack = function(target) {
+
+    if (!adjacentMode) {
+      let row, column;
+      if (attackCoordinates.length === 0) {
+        [row, column] = randomAttack(target);
+        getDiagonalMoves([row, column]).forEach((coordinates) => { diagonalAttackQueue.push(coordinates) })
+      } else {
+        [row, column] = diagonalAttackQueue[i];
         target.playerGameboard.receiveAttack([row, column]);
         attackCoordinates.push([row, column]);
-        
-        if (target.playerGameboard.isOccupied([row, column])) {
-          if (target.playerGameboard.isOccupied([row, column]).isSunk()) {
-            successfulAttackVerticalAdjacent = [];
-            successfulAttackHorizontalAdjacent = [];
-            adjacentMode = false;
-          } else {
-            if (orientation === 'horizontal') {
-              successfulAttack = [row, column];
-              adjacentMoves(successfulAttack).horizontalCoordinates.forEach((move) => successfulAttackHorizontalAdjacent.push(move));
-            } else {
-              successfulAttack = [row, column];
-              adjacentMoves(successfulAttack).verticalCoordinates.forEach((move) => successfulAttackVerticalAdjacent.push(move));
-            }
-          }
-        }
-        return [row, column];
+        getDiagonalMoves([row, column]).forEach((coordinates) => { diagonalAttackQueue.push(coordinates) })
+        i += 1;
+      }
+      if (target.playerGameboard.isOccupied([row, column])) {
+        adjacentMode = true;
+        successfulAttack = [row, column];
+        getAdjacentMoves(successfulAttack).verticalCoordinates.forEach((move) => successfulAttackVerticalAdjacent.push(move));
+        getAdjacentMoves(successfulAttack).horizontalCoordinates.forEach((move) => successfulAttackHorizontalAdjacent.push(move));
+      }
+      return [row, column];
+    } else {
+      return adjacentAttack(target);
     }
   };
 
@@ -202,7 +244,7 @@ const Computer = function() {
     }
   };
 
-  return { playerName, playerGameboard, randomAttack, adjacentAttack, randomPlaceShips };
+  return { playerName, playerGameboard, randomAttack, adjacentAttack, diagonalAttack, randomPlaceShips };
 }
 
 export { Ship, Gameboard, Player, Computer };

@@ -5,5 +5,5 @@ test('correctly shows when array is not in array', () => {
 })
 
 test('correctly shows when array is in array', () => {
-  expect(arrayIncludesArray([[1, 2], [1, 4, 3]], [1, 2])).toBe(true);
+  expect(arrayIncludesArray([[1, 2], [1, 4, 3]], [1, 4, 3], true)).toBe(1);
 })
