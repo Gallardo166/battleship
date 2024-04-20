@@ -18,14 +18,7 @@ body {
   gap: 16px;
 }
 
-#player-1 {
-  width: 90%;
-  aspect-ratio: 1 / 1;
-  display: grid;
-  grid-template: repeat(10, 1fr) / repeat(10, 1fr);
-}
-
-#player-2 {
+.gameboard {
   width: 90%;
   aspect-ratio: 1 / 1;
   display: grid;
@@ -36,11 +29,23 @@ body {
   border: 1px solid black;
 }
 
-.occupied {
-  background-color: black;
+.hover-place, .hover-attack, .occupied.hidden.hover-attack {
+  background-color: rgb(169, 168, 168);
 }
 
-.hit {
+.occupied {
+  background-color: rgb(87, 85, 85);
+}
+
+.hover-place.occupied {
+  background-color: rgb(28, 28, 28);
+}
+
+.outside-grid {
+  background-color: red;
+}
+
+.hit, .hover-attack.hit {
   background-color: blue;
 }
 

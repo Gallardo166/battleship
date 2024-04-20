@@ -78,6 +78,93 @@ const renderGameboard = function(player, hidden) {
   }
 };
 
+const showPlaceShip = function(player, length) {
+  const playerGrids = document.querySelectorAll(`[data-player='${player.playerName}'][class*='grid']`);
+  let shownGrids = [];
+
+  const addClass = function(event) {
+    const orientation = document.querySelector('#orientation').textContent.toLowerCase();
+    const grids = [];
+    const [row, column] = [Number(event.target.getAttribute('data-row')), Number(event.target.getAttribute('data-column'))];
+
+    Array.from(playerGrids).forEach((grid) => grid.classList.remove('hover-place', 'outside-grid'));
+    shownGrids = [];
+
+    if (orientation === 'horizontal') {
+      for (let i=0; i<length; i++) {
+        const grid = document.querySelector(`[data-row='${row}'][data-column='${column + i}'][data-player='${player.playerName}']`);
+        grids.push(grid);
+        if (!player.playerGameboard.isOccupied([row, column + i]) && !player.playerGameboard.isOutsideGameboard([row, column + i])) {
+          shownGrids.push([row, column]);
+        }
+      }
+    } else {
+      for (let i=0; i<length; i++) {
+        const grid = document.querySelector(`[data-row='${row + i}'][data-column='${column}'][data-player='${player.playerName}']`);
+        grids.push(grid);
+        if (!player.playerGameboard.isOccupied([row + i, column]) && !player.playerGameboard.isOutsideGameboard([row + i, column])) {
+          shownGrids.push([row, column]);
+        }
+      }
+    }
+
+    for (let i=0; i<grids.length; i++) {
+      if (grids[i] === null) {
+        grids.forEach((grid) => {
+          if (grid !== null) {grid.classList.add('outside-grid')}
+        });
+        return;
+      }
+    }
+    grids.forEach((grid) => grid.classList.add('hover-place'));
+
+    event.stopPropagation();
+  };
+
+  const removeEvent = function(event) {
+    if (shownGrids.length < length) { return }
+    Array.from(playerGrids).forEach((grid) => {
+      grid.removeEventListener('mouseover', addClass);
+      grid.classList.remove('hover-place', 'outside-grid');
+      grid.removeEventListener('click', removeEvent);
+    })
+
+    event.stopPropagation();
+  };
+
+  Array.from(playerGrids).forEach((grid) => {
+    grid.addEventListener('mouseover', addClass);
+    grid.addEventListener('click', removeEvent);
+  })
+};
+
+const showAttack = function(target) {
+  const targetGrids = document.querySelectorAll(`[data-player='${target.playerName}'][class*='grid']`);
+
+  const addClass = function(event) {
+    Array.from(targetGrids).forEach((grid) => grid.classList.remove('hover-attack'));
+    event.target.classList.add('hover-attack');
+
+    event.stopPropagation();
+  };
+
+  const removeEvent = function(event) {
+    if (event.target.classList.contains('hit')) { return }
+    Array.from(targetGrids).forEach((grid) => {
+      grid.removeEventListener('mouseover', addClass);
+      grid.classList.remove('hover-attack');
+      grid.removeEventListener('mousedown', removeEvent);
+    })
+
+    event.stopPropagation();
+  };
+
+  Array.from(targetGrids).forEach((grid) => {
+    grid.addEventListener('mouseover', addClass);
+    grid.addEventListener('mousedown', removeEvent);
+  })
+};
+
 const print = async function(message, afterDelay) {
   const grids = document.querySelectorAll('.grid');
   const messageContainer = document.querySelector('#message');
@@ -115,4 +202,4 @@ const restartGameboards = function() {
   });
  };
 
-export { hideOptions, showOptions, hideGame, showGame, hideDifficulties, showDifficulties, loadPassingScreen, stopPassingScreen, renderGameboard, print, toggleOrientationButton, restartGameboards };
+export { hideOptions, showOptions, hideGame, showGame, hideDifficulties, showDifficulties, loadPassingScreen, stopPassingScreen, renderGameboard, showPlaceShip, showAttack, print, toggleOrientationButton, restartGameboards };

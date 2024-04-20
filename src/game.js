@@ -1,5 +1,5 @@
 import { Player, Computer } from './components';
-import { hideOptions, showOptions, hideGame, showGame, showDifficulties, hideDifficulties, loadPassingScreen, renderGameboard, print, restartGameboards } from './dom';
+import { hideOptions, showOptions, hideGame, showGame, showDifficulties, hideDifficulties, loadPassingScreen, renderGameboard, showPlaceShip, showAttack, print, restartGameboards } from './dom';
 import { arrayIncludesArray } from './array-search';
 
 const homeScreen = function() {
@@ -52,8 +52,8 @@ const homeScreen = function() {
 
 const singlePlayerGame = async function(computer, attackFunction) {
   const player = Player('Player 1');
-  const playerGrids = document.querySelectorAll('[data-player="Player 1"]');
-  const computerGrids = document.querySelectorAll('[data-player="Player 2"]');
+  const playerGrids = document.querySelectorAll('[data-player="Player 1"][class*="grid"]');
+  const computerGrids = document.querySelectorAll('[data-player="Player 2"][class*="grid"]');
   const homeButton = document.querySelector('#home');
   const ships = [{length: 5, name: 'Carrier'}, {length: 4, name: 'Battleship'}, {length: 3, name: 'Destroyer'}, {length: 3, name: 'Submarine'}, {length: 2, name: 'Patrol Boat'}];
   let i = 0;
@@ -82,6 +82,7 @@ const singlePlayerGame = async function(computer, attackFunction) {
 
     if (i<5) {
       await print(`Place your ${ships[i].name}.`, 0);
+      showPlaceShip(player, ships[i].length);
       return;
     }
 
@@ -90,14 +91,18 @@ const singlePlayerGame = async function(computer, attackFunction) {
     computer.randomPlaceShips();
     renderGameboard(computer, true);
     await print('Your turn to attack.', 0);
+    showAttack(computer);
 
     Array.from(computerGrids).forEach((grid) => grid.addEventListener('click', attack));
+
+    event.stopPropagation();
   };
 
   const attack = async function(event) {
     const row = Number(event.target.getAttribute('data-row'));
     const column = Number(event.target.getAttribute('data-column'));
-    if (arrayIncludesArray(computer.playerGameboard.receivedAttacks, [row, column])) { 
+
+    if (arrayIncludesArray(computer.playerGameboard.receivedAttacks, [row, column])) {
       await print('You already attacked this spot. Your turn to attack.', 0);
       return;
     }
@@ -164,20 +169,22 @@ const singlePlayerGame = async function(computer, attackFunction) {
     }
 
     await print('Your turn to attack.', 0)
+    showAttack(computer);
     Array.from(computerGrids).forEach((grid) => grid.addEventListener('click', attack));
 
     event.stopPropagation();
   };
 
   await print('Place your Carrier.');
+  showPlaceShip(player, 5);
   Array.from(playerGrids).forEach((grid) => grid.addEventListener('click', placeShip));
 };
 
 const multiplayerGame = async function() {
   const playerOne = Player('Player 1');
   const playerTwo = Player('Player 2');
-  const playerOneGrids = document.querySelectorAll(`[data-player='Player 1']`);
-  const playerTwoGrids = document.querySelectorAll(`[data-player='Player 2']`);
+  const playerOneGrids = document.querySelectorAll(`[data-player='Player 1'][class*="grid"]`);
+  const playerTwoGrids = document.querySelectorAll(`[data-player='Player 2'][class*="grid"]`);
   const homeButton = document.querySelector('#home');
   const ships = [{length: 5, name: 'Carrier'}, {length: 4, name: 'Battleship'}, {length: 3, name: 'Destroyer'}, {length: 3, name: 'Submarine'}, {length: 2, name: 'Patrol Boat'}];
   let i = 0;
@@ -208,6 +215,7 @@ const multiplayerGame = async function() {
 
     if (i<5) {
       await print(`Place your ${ships[i].name}.`, 0);
+      showPlaceShip(currentPlayer, ships[i].length);
       return;
     }
 
@@ -221,8 +229,9 @@ const multiplayerGame = async function() {
         Array.from(playerOneGrids).forEach((grid) => grid.removeEventListener('click', placeShip));
         Array.from(playerTwoGrids).forEach((grid) => grid.addEventListener('click', placeShip));
         renderGameboard(playerOne, true);
-        currentPlayer = playerTwo;
+        currentPlayer = playerTwo
         await print('Player 2, place your Carrier.');
+        showPlaceShip(playerTwo, 5);
       });
     } else {
       Array.from(playerTwoGrids).forEach((grid) => grid.removeEventListener('click', placeShip));
@@ -236,6 +245,7 @@ const multiplayerGame = async function() {
         currentPlayer = playerOne;
         targetPlayer = playerTwo;
         await print("Player 1's turn to attack.");
+        showAttack(targetPlayer);
       });
     }
   };
@@ -243,8 +253,8 @@ const multiplayerGame = async function() {
   const attack = async function(event) {
     const row = Number(event.target.getAttribute('data-row'));
     const column = Number(event.target.getAttribute('data-column'));
-    const currentPlayerGrids = document.querySelectorAll(`[data-player='${currentPlayer.playerName}']`);
-    const targetPlayerGrids = document.querySelectorAll(`[data-player='${targetPlayer.playerName}']`);
+    const currentPlayerGrids = document.querySelectorAll(`[data-player='${currentPlayer.playerName}'][class*='grid']`);
+    const targetPlayerGrids = document.querySelectorAll(`[data-player='${targetPlayer.playerName}'][class*='grid']`);
     if (arrayIncludesArray(targetPlayer.playerGameboard.receivedAttacks, [row, column])) { 
       await print(`You already attacked this spot. ${currentPlayer.playerName}'s turn to attack.`, 0);
       return;
@@ -288,14 +298,16 @@ const multiplayerGame = async function() {
       const [a, b] = [targetPlayer, currentPlayer];
       targetPlayer = b;
       currentPlayer = a;
-
+  
       await print(`${currentPlayer.playerName}'s turn to attack.`);
+      showAttack(targetPlayer);
     });
 
     event.stopPropagation();
   };
 
   await print('Player 1, place your Carrier.');
+  showPlaceShip(playerOne, 5);
   Array.from(playerOneGrids).forEach((grid) => grid.addEventListener('click', placeShip));
 }
 
