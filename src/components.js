@@ -105,6 +105,7 @@ const Computer = function() {
   let orientation;
   let diagonalAttackQueue = [];
   let i = 0;
+  let j = 0;
 
   const randomAttack = function(target) {
     while (true) {
@@ -244,7 +245,23 @@ const Computer = function() {
     }
   };
 
-  return { playerName, playerGameboard, randomAttack, adjacentAttack, diagonalAttack, randomPlaceShips };
+  const unfairAttack = function(target) {
+    const [row, column] = target.playerGameboard.shipCoordinates[i].coordinates[j];
+    target.playerGameboard.receiveAttack([row, column]);
+    attackCoordinates.push([row, column]);
+    
+    if (j === target.playerGameboard.shipCoordinates[i].coordinates.length - 1) {
+      j = 0;
+      i += 1;
+    } else {
+      j += 1;
+    }
+
+    return [row, column];
+
+  }
+
+  return { playerName, playerGameboard, randomAttack, adjacentAttack, diagonalAttack, unfairAttack, randomPlaceShips };
 }
 
 export { Ship, Gameboard, Player, Computer };

@@ -8,6 +8,7 @@ const homeScreen = function() {
   const easy = document.querySelector('#easy');
   const medium = document.querySelector('#medium');
   const hard = document.querySelector('#hard');
+  const impossible = document.querySelector('#impossible');
 
   singlePlayer.addEventListener('click', () => {
     hideOptions();
@@ -40,6 +41,13 @@ const homeScreen = function() {
     showGame();
     singlePlayerGame(computer, computer.diagonalAttack);
   });
+
+  impossible.addEventListener('click', () => {
+    const computer = Computer();
+    hideDifficulties();
+    showGame();
+    singlePlayerGame(computer, computer.unfairAttack);
+  })
 };
 
 const singlePlayerGame = async function(computer, attackFunction) {
