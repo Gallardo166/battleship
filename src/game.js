@@ -1,5 +1,5 @@
 import { Player, Computer } from './components';
-import { hideOptions, showOptions, hideGame, showGame, showDifficulties, hideDifficulties, loadPassingScreen, renderGameboard, showPlaceShip, showAttack, print, restartGameboards } from './dom';
+import { hideOptions, showOptions, hideGame, showGame, showDifficulties, hideDifficulties, showNames, loadPassingScreen, renderGameboard, showPlaceShip, showAttack, print, restartGameboards } from './dom';
 import { arrayIncludesArray } from './array-search';
 
 const homeScreen = function() {
@@ -13,12 +13,14 @@ const homeScreen = function() {
   singlePlayer.addEventListener('click', () => {
     hideOptions();
     showDifficulties();
+    showNames('Player', 'Computer');
   });
 
   multiplayer.addEventListener('click', () => {
     hideOptions();
     showGame();
     multiplayerGame();
+    showNames('Player 1', 'Player 2');
   });
 
   easy.addEventListener('click', () => {
@@ -124,8 +126,8 @@ const singlePlayerGame = async function(computer, attackFunction) {
       }
     
     if (await checkEnd()) {
-       Array.from(computerGrids).forEach((grid) => grid.removeEventListener('click', attack));
-       homeButton.classList.remove('hidden');
+      Array.from(computerGrids).forEach((grid) => grid.removeEventListener('click', attack));
+      homeButton.classList.remove('hidden');
 
       homeButton.addEventListener('click', () => {
         restartGameboards();

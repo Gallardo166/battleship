@@ -1,44 +1,124 @@
+@font-face {
+  font-family: jersey;
+  src: url(fonts/Jersey25-Regular.ttf);
+}
+
 body {
   width: 100vw;
   height: 100vh;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  background-image: url(images/water.jpg);
+  background-size: cover;
 }
 
-#orientation-container, #message, #home {
-  align-self: center;
+div, p, button {
+  color: #cdd5dc;
+  font-family: jersey;
+  font-size: 1.2rem;
+  word-spacing: 5px;
+}
+
+button {
+  outline: none;
+  appearance: none;
+  border: none;
+  background-color: #414778;
+  padding: 8px;
+  box-shadow: inset -0.1em -0.2em 0.2em black;
+}
+
+button:hover {
+  background-color: #515683;
+  cursor: pointer;
+}
+
+#game-title {
+  font-size: 2rem;
+}
+
+#game {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+#message {
+  height: 64px;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  border: 2px solid #cdd5dc;
+
+  #character {
+    display: flex;
+    align-items: center;
+
+    img {
+      
+    }
+  }
+
+  #textbox {
+    padding: 0 8px;
+    width: 240px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+
+    #text {
+      font-size: 1.1rem;
+    }
+  }
 }
 
 #gameboard-container {
+  width: 90%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 16px;
+
+  p {
+    margin: 4px 0 0 0;
+  }
+
+  #player-1, #player-2 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
 }
 
 .gameboard {
-  width: 90%;
+  width: 120%;
   aspect-ratio: 1 / 1;
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
-}
+  row-gap: 2px;
+  column-gap: 2px;
+  cursor: crosshair;
 
-.grid {
-  border: 1px solid black;
+  .grid {
+    border: 1px solid #cdd5dc;
+  }
 }
 
 .hover-place, .hover-attack, .occupied.hidden.hover-attack {
-  background-color: rgb(169, 168, 168);
+  background-color: rgb(147, 168, 181);
 }
 
 .occupied {
-  background-color: rgb(87, 85, 85);
+  background-color: rgb(37, 173, 82);
 }
 
 .hover-place.occupied {
-  background-color: rgb(28, 28, 28);
+  background-color: rgb(33, 40, 57);
 }
 
 .outside-grid {
@@ -51,17 +131,60 @@ body {
 
 .occupied.hidden {
   display:block;
-  background-color:white;
+  background: none;
 }
 
 .occupied.hit {
   background-color: red;
 }
 
-.hidden {
+body > div.hidden, button.hidden {
+  display: none !important;
+}
+
+div.hidden {
   display: none;
 }
 
 .unclickable {
   pointer-events: none;
+}
+
+#game-options {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  justify-content: center;
+  align-items: center;
+  
+  #game-title {
+    margin: 0;
+    margin-top: -56px;
+  }
+
+  #options {
+    display: flex;
+    gap: 24px;
+  }
+}
+
+#difficulty {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+@media only screen and (min-width: 540px) {
+  #gameboard-container {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .gameboard {
+    width: 100%;
+  }
 }

@@ -7,8 +7,11 @@
   </head>
   <body>
     <div id="game-options">
-      <button id="single-player">Single Player</button>
-      <button id="multiplayer">Multiplayer</button>
+      <p id="game-title">Battleship</p>
+      <div id="options">
+        <button id="single-player">Single Player</button>
+        <button id="multiplayer">Multiplayer</button>
+      </div>
     </div>
     <div id="difficulty" class="hidden">
       <button id="easy">Easy</button>
@@ -20,213 +23,226 @@
       <div id="orientation-container">
         <button id="orientation">Horizontal</button>
       </div>
-      <div id="gameboard-container">
-        <div class="gameboard" data-player="Player 1">
-          <div class="grid" data-row="9" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="9" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="9" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="9" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="9" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="9" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="9" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="9" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="9" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="9" data-column="9" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="8" data-column="9" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="7" data-column="9" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="6" data-column="9" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="5" data-column="9" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="4" data-column="9" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="3" data-column="9" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="2" data-column="9" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="1" data-column="9" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="0" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="1" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="2" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="3" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="4" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="5" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="6" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="7" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="8" data-player="Player 1"></div>
-          <div class="grid" data-row="0" data-column="9" data-player="Player 1"></div>
+      <div id="message">
+        <div id="character">
+          <img src="<%=require('./images/bird.png') %>" height="60px" alt="Bird">
         </div>
-        <div class="gameboard" data-player="Player 2">
-          <div class="grid" data-row="9" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="9" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="9" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="9" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="9" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="9" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="9" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="9" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="9" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="9" data-column="9" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="8" data-column="9" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="7" data-column="9" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="6" data-column="9" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="5" data-column="9" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="4" data-column="9" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="3" data-column="9" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="2" data-column="9" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="1" data-column="9" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="0" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="1" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="2" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="3" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="4" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="5" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="6" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="7" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="8" data-player="Player 2"></div>
-          <div class="grid" data-row="0" data-column="9" data-player="Player 2"></div>
+        <div id="textbox">
+          <p id="text"></p>
         </div>
       </div>
-      <div id="message"></div>
+      <div id="gameboard-container">
+        <div id="player-1">
+          <p class="title" data-player="Player 1"></p>
+          <div class="gameboard" data-player="Player 1">
+            <div class="grid" data-row="9" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="9" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="9" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="9" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="9" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="9" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="9" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="9" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="9" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="9" data-column="9" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="8" data-column="9" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="7" data-column="9" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="6" data-column="9" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="5" data-column="9" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="4" data-column="9" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="3" data-column="9" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="2" data-column="9" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="1" data-column="9" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="0" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="1" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="2" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="3" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="4" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="5" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="6" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="7" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="8" data-player="Player 1"></div>
+            <div class="grid" data-row="0" data-column="9" data-player="Player 1"></div>
+          </div>
+        </div>
+        <div id="player-2">
+          <p class="title" data-player="Player 2"></p>
+          <div class="gameboard" data-player="Player 2">
+            <div class="grid" data-row="9" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="9" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="9" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="9" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="9" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="9" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="9" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="9" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="9" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="9" data-column="9" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="8" data-column="9" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="7" data-column="9" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="6" data-column="9" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="5" data-column="9" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="4" data-column="9" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="3" data-column="9" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="2" data-column="9" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="1" data-column="9" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="0" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="1" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="2" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="3" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="4" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="5" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="6" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="7" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="8" data-player="Player 2"></div>
+            <div class="grid" data-row="0" data-column="9" data-player="Player 2"></div>
+          </div>
+        </div>
+      </div>
       <button id="home" class="hidden">Home</button>
     </div>
     <div id="passing-screen" class="hidden">

@@ -32,7 +32,15 @@ const showDifficulties = function() {
   const difficulty = document.querySelector('#difficulty');
 
   difficulty.classList.remove('hidden');
-}
+};
+
+const showNames = function(playerOne, playerTwo) {
+  const playerOneTitle = document.querySelector('[class*="title"][data-player="Player 1"]');
+  const playerTwoTitle = document.querySelector('[class*="title"][data-player="Player 2"]');
+
+  playerOneTitle.textContent = playerOne;
+  playerTwoTitle.textContent = playerTwo;
+};
 
 const loadPassingScreen = function(nextFunction) {
   const game = document.querySelector('#game');
@@ -167,7 +175,7 @@ const showAttack = function(target) {
 
 const print = async function(message, afterDelay) {
   const grids = document.querySelectorAll('.grid');
-  const messageContainer = document.querySelector('#message');
+  const messageContainer = document.querySelector('#text');
   const messageCharacters = message.split('');
 
   Array.from(grids).forEach((grid) => {grid.classList.add('unclickable')});
@@ -202,4 +210,4 @@ const restartGameboards = function() {
   });
  };
 
-export { hideOptions, showOptions, hideGame, showGame, hideDifficulties, showDifficulties, loadPassingScreen, stopPassingScreen, renderGameboard, showPlaceShip, showAttack, print, toggleOrientationButton, restartGameboards };
+export { hideOptions, showOptions, hideGame, showGame, hideDifficulties, showDifficulties, showNames, loadPassingScreen, stopPassingScreen, renderGameboard, showPlaceShip, showAttack, print, toggleOrientationButton, restartGameboards };
