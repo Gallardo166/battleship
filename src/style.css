@@ -56,10 +56,6 @@ button:hover {
   #character {
     display: flex;
     align-items: center;
-
-    img {
-      
-    }
   }
 
   #textbox {
@@ -96,8 +92,8 @@ button:hover {
 }
 
 .gameboard {
-  width: 120%;
-  aspect-ratio: 1 / 1;
+  width: 240px;
+  height: 240px;
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
   row-gap: 2px;
@@ -186,5 +182,7 @@ div.hidden {
 
   .gameboard {
     width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
   }
 }
